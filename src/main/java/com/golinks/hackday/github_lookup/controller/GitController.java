@@ -11,7 +11,8 @@ public class GitController {
 
     @GetMapping("/GitUser/{user}")
     public GitHubUser getUser(@PathVariable String user) throws Exception {
-        return new GitHubUser(user);
+//        return new GitHubUser(user);
+        return null;
     }
 
 }

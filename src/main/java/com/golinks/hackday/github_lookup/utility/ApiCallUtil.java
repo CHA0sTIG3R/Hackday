@@ -13,40 +13,11 @@ import java.util.Map;
 public class ApiCallUtil {
 
     private static final String token = System.getenv("GITHUB_TOKEN");
+    private static final String url = "https://api.github.com/users/";
 
-    public static HttpResponse<String> StarredUtil(String user) throws IOException, InterruptedException {
-        GithubAPI githubAPI = new GithubAPI("https://api.github.com/users/"+user+"/starred", token);
-        // query the GitHub api
+    public static HttpResponse<String> UserUtil(String user) throws IOException, InterruptedException {
+        GithubAPI githubAPI = new GithubAPI(url+user+"/repos", token);
         return getStringHttpResponse(githubAPI);
-    }
-
-    public static Double ReposUtil(String user) throws IOException, InterruptedException {
-        GithubAPI githubAPI = new GithubAPI("https://api.github.com/users/"+user+"/repos", token);
-        // query the GitHub api
-        var res = getStringHttpResponse(githubAPI);
-        List<Map> list = new Gson().fromJson(res.body(), List.class);
-        var lst = list.stream().map(x -> {
-            Double e = (Double) x.get("forks_count");
-            return e;
-        }).toList().stream().mapToDouble(Double::intValue).sum();
-        return lst;
-    }
-
-    public static List langUtil(String user) throws IOException, InterruptedException {
-        GithubAPI githubAPI = new GithubAPI("https://api.github.com/users/"+user+"/repos", token);
-        // query the GitHub api
-        var res = getStringHttpResponse(githubAPI);
-        List<Map> list = new Gson().fromJson(res.body(), List.class);
-        var lst2 = list.stream().map(x -> x.get("language")).toList();
-        return lst2;
-    }
-
-    public static Double UserUtil(String user) throws IOException, InterruptedException {
-        GithubAPI githubAPI = new GithubAPI("https://api.github.com/users/"+user, token);
-        // query the GitHub api
-        var res = getStringHttpResponse(githubAPI);
-        var userInfo = new Gson().fromJson(res.body(), Map.class);
-        return (Double) userInfo.get("public_repos");
     }
 
     private static HttpResponse<String> getStringHttpResponse(GithubAPI githubAPI) throws IOException, InterruptedException {
@@ -58,9 +29,7 @@ public class ApiCallUtil {
                 .GET()
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return response;
+        return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
 

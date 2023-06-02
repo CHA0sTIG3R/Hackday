@@ -60,7 +60,7 @@ public class GithubAPITest {
 
         var not_forked = repos.stream().filter(x -> (Boolean) x.get("fork")).toList();
 
-        var forks = repos.stream().map(x -> {
+        var forks = (int) repos.stream().map(x -> {
             Double e = (Double) x.get("forks_count");
             return e;
         }).toList().stream().mapToDouble(Double::intValue).sum();
@@ -74,12 +74,12 @@ public class GithubAPITest {
 
         var repoCount = repos.size();
 
-        var stars = repos.stream().map(x -> {
+        var stars = (int) repos.stream().map(x -> {
             Double e = (Double) x.get("stargazers_count");
             return e;
         }).toList().stream().mapToDouble(Double::intValue).sum();
 
-        var size = repos.stream().map(x -> {
+        var size = (int) repos.stream().map(x -> {
             Double e = (Double) x.get("size");
             return e;
         }).toList().stream().mapToDouble(Double::intValue).sum();

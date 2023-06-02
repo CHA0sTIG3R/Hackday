@@ -1,35 +1,60 @@
 package com.golinks.hackday.github_lookup.model;
 
-import com.golinks.hackday.github_lookup.utility.ApiCallUtil;
-
-import java.io.IOException;
 import java.util.List;
 
 public class GitHubUser {
 
     private String login;
-    private Double repos;
+    private int repos;
     private int stargazers;
-    private Double forks;
+    private int forks;
+
+    private int size;
+
     private List<String> languages;
 
-    public GitHubUser(String login) throws IOException, InterruptedException {
-        var user = ApiCallUtil.UserUtil(login);
-        var userRepos = ApiCallUtil.ReposUtil(login);
-        var userLang = ApiCallUtil.langUtil(login);
-
+    public GitHubUser(String login, int repos, int stargazers, int forks, int size, List<String> languages) {
         this.login = login;
-        this.repos = user;
-        this.stargazers = 0;
-        this.forks = userRepos;
-        this.languages = userLang;
+        this.repos = repos;
+        this.stargazers = stargazers;
+        this.forks = forks;
+        this.size = size;
+        this.languages = languages;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setRepos(int repos) {
+        this.repos = repos;
+    }
+
+    public void setStargazers(int stargazers) {
+        this.stargazers = stargazers;
+    }
+
+    public void setForks(int forks) {
+        this.forks = forks;
+    }
+
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public Double getRepos() {
+    public int getRepos() {
         return repos;
     }
 
@@ -37,7 +62,7 @@ public class GitHubUser {
         return stargazers;
     }
 
-    public Double getForks() {
+    public int getForks() {
         return forks;
     }
 
