@@ -7,9 +7,9 @@ public class GitHubUser {
     private String login;
     private int repos;
     private int stargazers;
-    private int forks;
+    private int forkCount;
 
-    private int size;
+    private String avgSize;
 
     private List<String> languages;
 
@@ -17,37 +17,13 @@ public class GitHubUser {
         this.login = login;
         this.repos = repos;
         this.stargazers = stargazers;
-        this.forks = forks;
-        this.size = size;
+        this.forkCount = forks;
+        this.avgSize = size + " KB";
         this.languages = languages;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setRepos(int repos) {
-        this.repos = repos;
-    }
-
-    public void setStargazers(int stargazers) {
-        this.stargazers = stargazers;
-    }
-
-    public void setForks(int forks) {
-        this.forks = forks;
-    }
-
-    public void setLanguages(List<String> languages) {
-        this.languages = languages;
+    public String getAvgSize() {
+        return avgSize;
     }
 
     public String getLogin() {
@@ -62,8 +38,8 @@ public class GitHubUser {
         return stargazers;
     }
 
-    public int getForks() {
-        return forks;
+    public int getForkCount() {
+        return forkCount;
     }
 
     public List<String> getLanguages() {
@@ -76,21 +52,21 @@ public class GitHubUser {
                 "login='" + login + '\'' +
                 ", repos=" + repos +
                 ", stargazers=" + stargazers +
-                ", forks=" + forks +
+                ", forks=" + forkCount +
                 ", languages=" + languages +
                 '}';
     }
 
     public String toMarkdown() {
-        return "| " + login + " | " + repos + " | " + stargazers + " | " + forks + " | " + languages + " |";
+        return "| " + login + " | " + repos + " | " + stargazers + " | " + forkCount + " | " + languages + " |";
     }
 
     public String toHtml() {
-        return "<tr><td>" + login + "</td><td>" + repos + "</td><td>" + stargazers + "</td><td>" + forks + "</td><td>" + languages + "</td></tr>";
+        return "<tr><td>" + login + "</td><td>" + repos + "</td><td>" + stargazers + "</td><td>" + forkCount + "</td><td>" + languages + "</td></tr>";
     }
 
     public String toCsv() {
-        return login + "," + repos + "," + stargazers + "," + forks + "," + languages;
+        return login + "," + repos + "," + stargazers + "," + forkCount + "," + languages;
     }
 
 }

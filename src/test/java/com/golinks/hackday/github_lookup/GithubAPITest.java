@@ -68,8 +68,8 @@ public class GithubAPITest {
         var lang = repos.stream().map(x -> (String) x.get("language"))
                 .collect(Collectors.toMap(x -> x, x -> 1, Integer::sum))
                 .entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .map(Map.Entry::getKey)
-                .filter(Objects::nonNull)
+                .map(x -> x.getKey() + " " + x.getValue())
+                .filter(x -> !x.contains("null"))
                 .collect(Collectors.toList());
 
         var repoCount = repos.size();
